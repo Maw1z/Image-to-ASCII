@@ -1,2 +1,0 @@
-class NoFileExtensionError(Exception):
-    pass

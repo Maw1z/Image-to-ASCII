@@ -1,9 +1,7 @@
 from PIL import Image
 import sys
-import re
-from errors import NoFileExtensionError
 
-def image_to_ascii(image_name, type, file_name):
+def image_to_ascii(image_name, file_name):
     img = Image.open(image_name)
     w, h = img.size
     
@@ -16,7 +14,7 @@ def image_to_ascii(image_name, type, file_name):
         scale = 5
     
     resized_img = img.resize((w//scale, h//scale))
-    w_resized, h_resized = resized_img.size
+    w, h = resized_img.size
     
     # Populating picture list with blank pixels
     picgrid = []
@@ -50,21 +48,10 @@ def image_to_ascii(image_name, type, file_name):
                 
     file = open(file_name, "w")
     
-    for column in picgrid:
-        file.write("".join(column)+"\n")
+    for row in picgrid:
+        file.write("".join(row)+"\n")
                     
     file.close()
-    
-def get_file_extension(filename):
-    extension = re.search(r"\.([^.]+)$", filename)
-    if extension:
-        return extension.group(1)
-    else:
-        raise NoFileExtensionError(f"No file extension found in filename: {filename}")
-    
+  
 if __name__ == '__main__':
-    try:
-        extension = get_file_extension(sys.argv[1])
-        image_to_ascii(sys.argv[1], extension, sys.argv[2])
-    except NoFileExtensionError as e:
-        print(e)
+    image_to_ascii(sys.argv[1], sys.argv[2])
