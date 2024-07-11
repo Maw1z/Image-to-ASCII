@@ -7,7 +7,6 @@ This Python script converts an image to ASCII art and saves it as a text file. I
 - Converts images to ASCII art
 - Supports different scaling based on image size
 - Customizable character mapping for ASCII art
-- Error handling for missing file extensions
 
 ## Requirements
 
